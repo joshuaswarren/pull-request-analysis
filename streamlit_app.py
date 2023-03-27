@@ -2,11 +2,10 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import os
-from decouple import config
 
-GITHUB_TOKEN=config('GITHUB_TOKEN')
-
+GITHUB_TOKEN = os.environ["GITHUB_TOKEN"]
 st.title('Magento Pull Requests')
+
 
 @st.cache_data
 def load_data():
