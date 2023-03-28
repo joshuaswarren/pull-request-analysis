@@ -2,6 +2,8 @@ import requests
 import pandas as pd
 import streamlit as st
 import os
+import matplotlib.pyplot as plt
+
 from datetime import datetime
 
 GITHUB_TOKEN = os.environ["GITHUB_TOKEN"]
@@ -77,7 +79,7 @@ if st.checkbox('Show raw data'):
 # Visualization 1: Number of pull requests per month
 df["created_month"] = df["created_at"].dt.to_period("M").astype(str)
 monthly_counts = df["created_month"].value_counts().sort_index()
-st.title("Pull Requests Per Month")
+st.title("Open Pull Requests Per Month Opened")
 st.bar_chart(monthly_counts)
 
 # Visualization 2: Assignee count
@@ -92,5 +94,25 @@ st.write(reviewer_df)
 
 # Visualization 4: Label count
 label_df = pd.DataFrame.from_dict(label_count, orient="index", columns=["count"]).sort_values(by="count", ascending=False)
-st.title("Number of Pull Requests per Label")
+st.title("Number of Open Pull Requests per Label")
 st.write(label_df)
+
+# Visualization 5: Number of pull requests per year
+df["created_year"] = df["created_at"].dt.to_period("Y").astype(str)
+yearly_counts = df["created_year"].value_counts().sort_index()
+st.title("Open Pull Requests Per Year Opened")
+st.bar_chart(yearly_counts)
+
+# Visualization 6: Pie chart for selected labels
+selected_labels = ["Progress: pending review", "Progress: ready for testing", "Progress: review", "Progress: needs update",
+                   "Progress: extended testing", "Progress: accept", "Progress: pending approval", "progress: to approve",
+                   "Progress: on hold"]
+selected_label_counts = {label: label_count.get(label, 0) for label in selected_labels}
+selected_label_df = pd.DataFrame.from_dict(selected_label_counts, orient="index", columns=["count"])
+st.title("Open Pull Requests by Progress Labels")
+st.write(selected_label_df)
+
+fig, ax = plt.subplots(figsize=(10, 6))
+selected_label_df.plot.pie(y="count", legend=False, autopct="%.1f%%", ax=ax)
+ax.set_ylabel("")
+st.pyplot(fig)
