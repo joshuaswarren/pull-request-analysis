@@ -81,7 +81,7 @@ if st.checkbox('Show raw data'):
 # Visualization 1: Number of pull requests per month
 df["created_month"] = df["created_at"].dt.to_period("M").astype(str)
 monthly_counts = df["created_month"].value_counts().sort_index()
-st.title("Open Pull Requests Per Month Opened")
+st.title("Open Pull Requests Per Month Created")
 st.bar_chart(monthly_counts)
 
 # Visualization 2: Assignee count
