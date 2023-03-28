@@ -2,7 +2,7 @@ import requests
 import pandas as pd
 import streamlit as st
 import os
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as pty
 
 from datetime import datetime
 
@@ -112,7 +112,7 @@ selected_label_df = pd.DataFrame.from_dict(selected_label_counts, orient="index"
 st.title("Open Pull Requests by Progress Labels")
 st.write(selected_label_df)
 
-fig, ax = plt.subplots(figsize=(10, 6))
+fig, ax = pty.subplots(figsize=(10, 6))
 selected_label_df.plot.pie(y="count", legend=False, autopct="%.1f%%", ax=ax)
 ax.set_ylabel("")
 st.pyplot(fig)
