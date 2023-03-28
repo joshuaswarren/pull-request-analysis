@@ -25,3 +25,6 @@ def load_data():
 data_load_state = st.text('Loading data...')
 data = load_data()
 data_load_state.text('Loading data...done!')
+if st.checkbox('Show raw data'):
+    st.subheader('Raw data')
+    st.write(data)
