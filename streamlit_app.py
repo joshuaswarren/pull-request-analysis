@@ -72,6 +72,7 @@ for row in df.itertuples():
 
 # Display results with streamlit
 st.title("Magento/magento2 Open Pull Requests")
+st.write("Powered by https://github.com/joshuaswarren/pull-request-analysis")
 if st.checkbox('Show raw data'):
     st.subheader('Raw data')
     st.write(df)
