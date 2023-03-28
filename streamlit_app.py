@@ -71,7 +71,8 @@ for row in df.itertuples():
             reviewer_count[reviewer] = 1
 
 # Display results with streamlit
-st.title("Magento/magento2 Open Pull Requests")
+st.title("Magento Open Pull Requests")
+st.write("Based on data from the GitHub API for https://github.com/magento/magento2")
 st.write("Powered by https://github.com/joshuaswarren/pull-request-analysis")
 if st.checkbox('Show raw data'):
     st.subheader('Raw data')
